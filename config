@@ -1,0 +1,437 @@
+# i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+#::::::::::::::::: Tecla window por default::::::::::::::::::::#
+#::::::::::::::::(Mod1=<Alt> - Mod4=<Super>):::::::::::::::::::#
+set $mod Mod4
+
+# set default desktop layout (default is tiling)
+# workspace_layout tabbed <stacking|tabbed>
+
+
+#:::::::::::::::::Config de estilo de bordas::::::::::::::::::::#
+
+##<normal|1pixel|pixel xx|none|pixel> 
+new_window pixel 1
+new_float normal
+
+#:::::::::::::::::::::: Ocultar bordas ::::::::::::::::::::::::#
+hide_edge_borders none                                                                         
+
+#:::::::::::::::::::::: Alterar bordas ::::::::::::::::::::::::#
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+
+#:::::::::::::::::::::: Font para titulos de janela ::::::::::::::::::::::::#
+
+#:::::::::::::::::::::: É usado na barra/painel ::::::::::::::::::::::::#
+font xft:Noto Mono 10
+
+#:::::::::::::::::::::: Usar Mouse+$mod para arrastar janelas flutuantes ::::::::::::::::::::::::#
+floating_modifier $mod
+
+#:::::::::::::::::::::: start a terminal ::::::::::::::::::::::::#
+bindsym $mod+Return exec terminal
+
+#:::::::::::::::::::::: kill janela focada ::::::::::::::::::::::::#
+bindsym $mod+Shift+q kill
+
+#:::::::::::::::::::::: start Dmenu+Rofi ::::::::::::::::::::::::#
+bindsym $mod+d exec --no-startup-id rofi -show run -width 400 -lines 5 -font "Ohsnap 9" -hide-scrollbar -glob -separator-style "dash" 
+
+#:::::::::::::::::::::: Iniciar menu categorizado::::::::::::::::::::::::#
+bindsym $mod+z exec --no-startup-id morc_menu
+
+#:::::::::::::::::::::: sound-section ::::::::::::::::::::::::#
+
+exec --no-startup-id volumeicon
+bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+#exec --no-startup-id pulseaudio
+#exec --no-startup-id pa-applet
+#bindsym $mod+Ctrl+m exec pavucontrol
+
+#:::::::::::::::::::::: brightness-section ::::::::::::::::::::::::#
+
+# Screen brightness controls                                                                   
+# bindsym XF86MonBrightnessUp exec "xbacklight -inc 5; notify-send 'brightness up'"           
+# bindsym XF86MonBrightnessDown exec "xbacklight -dec 5; notify-send 'brightness down'"       
+
+
+
+#:::::::::::::::::::::: Start Applications ::::::::::::::::::::::::#                                                                         
+
+bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+bindsym $mod+F2 exec firefox
+bindsym $mod+F3 exec pcmanfm
+#bindsym $mod+F4 exec ranger
+bindsym $mod+Shift+F3 exec gksu pcmanfm
+bindsym $mod+F5 exec terminal -e 'mocp'
+bindsym $mod+t exec --no-startup-id pkill compton
+bindsym $mod+Ctrl+t exec --no-startup-id compton -b
+bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+##focus_follows_mouse no
+
+#:::::::::::::::::::::: Config default ::::::::::::::::::::::::#
+# Escolha de foco
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+odiaeresis focus right
+
+#::::::::::::::::::::::Você pode usar as teclas do cursor ::::::::::::::::::::::::#
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+#:::::::::::::::::::::: Mover janela focada ::::::::::::::::::::::::#
+
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+odiaeresis move right
+
+#::::::::::::::::::::::Você pode usar as teclas do cursor ::::::::::::::::::::::::#
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+#:::::::::::::::::::::: Espaço de trapalho para frente e para trás ::::::::::::::::::::::::#
+
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+#:::::::::::::::::::::: Divisão de orientação ::::::::::::::::::::::::#
+
+bindsym $mod+h split h;exec notify-send 'tile horizontally'
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $mod+q split toggle
+
+#:::::::::::::::::::::: Alternar o modo tela cheia para contêiner focado ::::::::::::::::::::::::#
+bindsym $mod+f fullscreen toggle
+
+#:::::::::::::::::::::: Alterar layout de contêiner(Empilhados, com guias, alternar divisão) ::::::::::::::::::::::::#
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+#:::::::::::::::::::::: Alternar mozaico/flutuação ::::::::::::::::::::::::#
+bindsym $mod+Shift+space floating toggle
+
+#:::::::::::::::::::::: Alternar o foco da janela entre mosaico e flutuante ::::::::::::::::::::::::#
+bindsym $mod+space focus mode_toggle
+
+#:::::::::::::::::::::: Alternar estilo grudento ::::::::::::::::::::::::#
+bindsym $mod+Shift+s sticky toggle
+
+#:::::::::::::::::::::: Foco no conteiner pai ::::::::::::::::::::::::#
+bindsym $mod+a focus parent
+
+#:::::::::::::::::::::: Mova a janela atualmente focada para o scratchpad ::::::::::::::::::::::::#
+bindsym $mod+Shift+minus move scratchpad
+
+#Mostrar a proxima janela do scratchpad ou ocultar janela do scretchpad focada 
+#Se houver várias janelas scratchpad, este comando percorrerá
+bindsym $mod+minus scratchpad show
+
+#:::::::::::::::::::::: navagar entre workspaces ::::::::::::::::::::::::#
+
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+#customizar workspace name#
+              																	
+#:::::::::::::::::::::: Escolha de workspace ::::::::::::::::::::::::#
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+
+#::::::::: Mover para workspace o conteiner focado :::::::::::#
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace 1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace 2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace 3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace 4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace 5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace 6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace 7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace 8
+
+
+#::::::::: Atribuindo programas ao espaço de trabalho :::::::::::#
+
+#assign [class="Firefox"] 	    $ws1
+#assign [class="Pcmanfm"] 	    $ws2
+#assign [class="Termite"] 	    $ws3
+#assign [class="mplayer"] 	    $ws4
+#assign [class="Vlc"] 	        $ws5
+#assign [class="Franz"]		    $ws6
+#assign [class="libreoffice"]	$ws7
+#assign [class="Qbittorrent"]	$ws8
+
+
+
+#:::::: Programas que se inician nos espaços de trabalho :::::::#
+
+#exec --no-startup-id i3-msg 'workspace 1  ; exec firefox'
+#exec --no-startup-id i3-msg 'workspace 2  ; exec pcmanfm'
+#exec --no-startup-id i3-msg 'workspace 3  ; exec terminal'
+#exec --no-startup-id i3-msg 'workspace 4: ; exec terminator -e mocp'
+#exec --no-startup-id i3-msg 'workspace 5: ; exec terminator'
+
+
+
+#:::::::::::::::: Config de estilo de bordas ::::::::::::::::::#
+
+# <normal|1pixel|pixel xx|none|pixel> #
+new_window pixel 1
+new_float normal
+
+
+
+#:::::::::::: Desativar os botões da janela :::::::::::::::#
+hide_edge_borders none
+
+
+
+#::::::::::::::::: Janelas modo flutuante :::::::::::::::::::::#
+
+
+#Janelas flutuantes com bordas#
+
+for_window [class="Galculator"] floating enable border normal
+for_window [class="Geany"] floating enable border normal
+for_window [class="GParted"] floating enable border normal
+for_window [class="JDownloader"] floating enable border normal
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable border normal
+for_window [class="Lxappearance"] floating enable border normal
+for_window [class="Mousepad"] floating enable border normal
+for_window [class="Nitrogen"] floating enable border normal
+for_window [class="Pamac-update"] floating enable border normal
+for_window [class="Pavucontrol"] floating enable border normal
+for_window [class="Transmission-gtk"] floatingenable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+
+#Janelas flutuantes sem bordas#
+
+for_window [class="Firefox"] enable border pixel 1
+for_window [class="Galculator"] floating enable border pixel 4
+for_window [class="soundconverter"] floating enable border pixel 1
+for_window [class="Sonata"] floating enable border pixel 4
+for_window [class="Terminator"] floating enable border pixel 1
+for_window [class="Termite"] floating enable border pixel 4
+for_window [class="Vlc"] floating enable border pixel 1
+for_window [class="xarchiver"] floating enable border pixel 1
+for_window [class="XTerm"] floating enable border pixel 4
+
+
+#:::::::::::::::::::::: Config default ::::::::::::::::::::::::#
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym n resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+#:::::::::::::::::::::: Config do painel ::::::::::::::::::::::#
+
+bar {
+	status_command 			i3status
+	position 			top
+	separator_symbol 		"::"
+	tray_output 			eDP1
+	bindsym button4 		nop
+	bindsym button5 		nop
+	font xft:Noto 			Sans,Icons 10
+	strip_workspace_numbers 	yes
+
+colors {
+		background #120b07
+		statusline #a9a28f
+		separator  #009992
+		background $transparent
+
+# Numix-Dark 1d2121 414848
+
+#::::::::::::::::::::::: Indicadores ::::::::::::::::::::::::::#
+
+#				    border backgr. text
+		focused_workspace  #009992 #009992 #
+		inactive_workspace #a9a28f #a9a28f #120b07
+		urgent_workspace   #535353 #535353 #fcfcfc
+	}
+}
+
+
+#:::::::::::::::: Marco Da Janela ::::::::::::::::::#
+
+# class           		 border  backgr  text   indicator child_border 
+client.focused		 	#120b07 #120b07 #a9a28f  #ffffff   #120b07
+client.focused_inactive 	#1d2121 #1d2121 #ffffff  #484e50   #1d2121
+client.unfocused 		#272727 #272727 #fdfdfd  #bfbfbf   #272727	
+client.urgent   		#d64937 #d64937 #fdfdfd  #fbfbfb   #333333
+client.placeholder     		#000000 #0c0c0c #ffffff  #000000   #0c0c0c
+
+client.background       	#111313
+
+
+
+
+
+#:::::::::::::::: hide/unhide i3status bar ::::::::::::::::::#
+
+bindsym $mod+m bar mode toggle
+
+# Theme colors
+# class                 border  backgr. text    indic.  child_border
+client.focused          #808280 #808280 #80FFF9 #FDF6E3
+client.focused_inactive #434745 #434745 #16A085 #454948
+client.unfocused        #434745 #434745 #16A085 #454948
+client.urgent           #CB4B16 #FDF6E3 #16A085 #268BD2
+client.placeholder      #000000 #0c0c0c #ffffff #000000 #0c0c0c
+
+client.background       #2B2C2B
+
+
+#::::::::::::::::::: Settings for i3-gaps :::::::::::::::::::::#
+
+# Set inner/outer gaps
+#gaps inner 10
+#gaps outer -4
+set $default_gaps_inner 10
+set $default_gaps_outer -4
+gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+#:::::::::::::::::::: Saida do sistema ::::::::::::::::::::::#
+
+set $Locker i3lock && sleep 1
+set $mode_system System:   L :  | S :  | P :  | R :  | E :   
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3lock-fancy, mode "default"
+    bindsym s exec --no-startup-id $Lock systemctl suspend, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+x mode "$mode_system"
+
+
+#::::::::::::::::::: Aplicações de inicio :::::::::::::::::::#
+
+# Autostart applications
+## adjustment of i3bar battery reading (only run at the very first login):
+#exec --no-startup-id /usr/bin/adjust_i3statusconf
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id clipit
+# exec --no-startup-id blueman
+# exec_always --no-startup-id sbxkb
+exec --no-startup-id start_conky_maia
+# exec --no-startup-id start_conky_green
+exec_always --no-startup-id setcursor
+
+#wallpaper#
+exec feh --bg-fill '/home/victor/Imagens/wallhaven-448389.jpg'

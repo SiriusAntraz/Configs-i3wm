@@ -1,0 +1,1 @@
+Configuração i3wm
